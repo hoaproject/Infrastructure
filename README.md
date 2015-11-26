@@ -8,6 +8,24 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 This repository contains everything required to set up the whole Hoa's
 infrastructure.
 
+## Organization
+
+## Services
+
+### Web
+
+### Database
+
+### Mail
+
+### DNS
+
+### Repository
+
+### Continuous Integration
+
+### Search
+
 ## Documentation
 
 Different documentations can be found on the website:
