@@ -3,28 +3,15 @@
 Hoa is a **modular**, **extensible** and **structured** set of PHP libraries.
 Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
-# Infrastructure
+# Machine image templates
 
-This repository contains everything required to set up the whole Hoa's
-infrastructure.
+This directory contains the template/configuration files to create artifacts.
 
 ## Organisation
 
-## Services
+We find the following templates:
 
-### Web
-
-### Database
-
-### Mail
-
-### DNS
-
-### Repository
-
-### Continuous Integration
-
-### Search
+  * `Debian_64`.
 
 ## Documentation
 

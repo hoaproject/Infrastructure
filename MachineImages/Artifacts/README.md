@@ -3,28 +3,10 @@
 Hoa is a **modular**, **extensible** and **structured** set of PHP libraries.
 Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
-# Infrastructure
+# Machine image artifacts
 
-This repository contains everything required to set up the whole Hoa's
-infrastructure.
-
-## Organisation
-
-## Services
-
-### Web
-
-### Database
-
-### Mail
-
-### DNS
-
-### Repository
-
-### Continuous Integration
-
-### Search
+This directory contains the machine image artifacts, i.e. the real machine
+images, ready to be used.
 
 ## Documentation
 
