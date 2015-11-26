@@ -11,7 +11,7 @@ This directory contains the template/configuration files to create artifacts.
 
 We find the following templates:
 
-  * `Debian_64`.
+  * `Debian_amd64`, to build a `debian-8.2.0-amd64` image.
 
 ## Documentation
 

@@ -1,0 +1,6 @@
+{
+    "name"             : "debian-amd64",
+    "headless"         : "false",
+    "builder_type"     : "virtualbox-iso",
+    "builder_extension": "vbox"
+}

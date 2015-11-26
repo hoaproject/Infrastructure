@@ -1,0 +1,41 @@
+{
+    "variables": {
+        "name"             : "debian-amd64",
+        "headless"         : "true",
+        "builder_type"     : "virtualbox-iso",
+        "builder_extension": "vbox"
+    },
+    "builders": [
+        {
+            "type"             : "virtualbox-iso",
+            "name"             : "{{user `name`}}-{{user `builder_extension`}}",
+            "iso_url"          : "http://cdimage.debian.org/debian-cd/8.2.0/amd64/iso-cd/debian-8.2.0-amd64-netinst.iso",
+            "iso_checksum"     : "762eb3dfc22f85faf659001ebf270b4f",
+            "iso_checksum_type": "md5",
+            "guest_os_type"    : "Debian_64",
+            "headless"         : "{{user `headless`}}",
+            "disk_size"        : "5120",
+            "ssh_port"         : "22",
+            "ssh_username"     : "architectus",
+            "ssh_password"     : "infra",
+            "ssh_wait_timeout" : "1800s",
+            "http_directory"   : "Http",
+            "http_port_min"    : 9000,
+            "http_port_max"    : 9500,
+            "boot_wait"        : "5s",
+            "boot_command"     : [
+                "<esc><wait>auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/Preseed.cfg<enter>"
+            ],
+            "shutdown_command" : "sudo halt -p",
+            "vm_name"          : "{{user `name`}}"
+        }
+    ],
+    "provisioners": [
+        {
+            "type"   : "shell",
+            "scripts": [
+                "Scripts/Initialize.sh"
+            ]
+        }
+    ]
+}
