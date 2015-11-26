@@ -22,7 +22,7 @@ We find the following directories:
 We use [Packer](https://packer.io/) to build all our machine images. See [the
 requirements to install it](https://packer.io/downloads.html).
 
-To pre-provisionning the machine images we use Shell scripts so far.
+To pre-provision the machine images we use Shell scripts so far.
 
 ## Documentation
 

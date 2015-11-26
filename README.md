@@ -10,6 +10,10 @@ infrastructure.
 
 ## Organisation
 
+We find the following directories:
+
+  * `MachineImages`, contain all the scripts and artifacts about machine images.
+
 ## Services
 
 ### Web
