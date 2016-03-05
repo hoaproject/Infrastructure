@@ -1,0 +1,132 @@
+#!/bin/bash
+#
+# The `Prelude` script prepares the environment for all scripts, ensuring a
+# consistent script behavior everywhere. In addition, it provides useful
+# common functions and install common tools.
+
+# If a command fails, `set -e` will make the whole script exit instead of just
+# resuming on the next line.
+set -e
+
+# Treat unset variables as errors, and thus exit immediately.
+set -u
+
+# Disable filename expansion (“glob”) upon seeing `*`, `?` etc.
+set -f
+
+# `set -o pipefail` causes a pipeline (for instance `curl … | …`) to produce a
+# failure return code if any command fails. Normally, pipelines only return a
+# failure if the last command fails. In combination with `set -e`, this will
+# make the script exits if any command in a pipeline fails
+set -o pipefail
+
+#
+# Prints a message on `STDOUT`. The error is prefixed by the current date and
+# time.
+#
+# Globals:
+#     None
+# Arguments:
+#     Strings to output on `STDOUT`
+# Returns:
+#     None
+# Examples:
+#     Prints `Hello world` on `STDOUT`:
+#         arch::echo "Hello world"
+#
+arch::echo() {
+    echo -e "[$(date +'%Y-%m-%dT%H:%M:%S%z')] $@"
+}
+
+#
+# Print an error on `STDERR`. The error is prefixed by the current date and
+# time.
+#
+# Globals:
+#     None
+# Arguments:
+#     Strings to output on `STDERR`
+# Returns:
+#     None
+# Examples:
+#     Prints `Damn!` on `STDERR`:
+#         arch::error "Damn!"
+#
+arch::error() {
+    echo -e "\e[97;41m[$(date +'%Y-%m-%dT%H:%M:%S%z')]\e[0m $@" >&2
+}
+
+#
+# Print an information message on `STDOUT`. The message is prefixed by the
+# current date and time.
+#
+# Globals:
+#     None
+# Arguments:
+#     Strings to output on `STDOUT`
+# Returns:
+#     None
+# Examples:
+#     Prints `Hello world` on `STDOUT`:
+#         arch::info "Hello world"
+#
+arch::info() {
+    echo -e "\e[30;43m[$(date +'%Y-%m-%dT%H:%M:%S%z')]\e[0m $@"
+}
+
+#
+# Execute a portion of code in an unsafe state, i.e. run `set +e` before
+# executing the portion of code, and then re-apply `set -e`.
+#
+# Globals:
+#     None
+# Arguments:
+#     Variable name that will receive the command result.
+#     Command to execute.
+# Returns:
+#     0
+#     The exit status of the last command is set in the `$unsafe_status`
+#     variable.
+# Examples:
+#     Try to locate the `foo` program:
+#         arch::unsafe "foo_path" "which foo"
+#         echo $unsafe_status
+#         echo $foo_path
+#     This is equivalent to:
+#         foo_path="$(which "foo")"
+#         echo $?
+#         echo $foo_path
+#     except it is not subject to `set -e`.
+#
+arch::unsafe() {
+    local ret="$1"
+    local command="$2"
+    set +e
+    eval "$ret=$($command); unsafe_status=$?"
+    set -e
+
+    # Always returns 0 else `set -e` will exit.
+    return 0
+}
+
+# [`git`](http://git-scm.com/) is required to install a large part of the
+# services, so this is a de facto standard tool.
+arch::unsafe git "which git"
+
+if [[ "$unsafe_status" -ne 0 ]]; then
+    arch::info "\`git\` is not found; installing it."
+
+    sudo apt-get install -y git
+fi
+
+# [`bats`](https://github.com/sstephenson/bats) is required to test a large part
+# of the services.
+arch::unsafe bats "which bats"
+
+if [[ "$unsafe_status" -ne 0 ]]; then
+    arch::info "\`bats\` is not found; installing it."
+
+    rm -rf /tmp/bats
+    git clone https://github.com/sstephenson/bats.git /tmp/bats
+    sudo /tmp/bats/install.sh /usr/local
+fi

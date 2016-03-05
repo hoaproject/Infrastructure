@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Install nginx.
+
+sudo apt-get install nginx-full
