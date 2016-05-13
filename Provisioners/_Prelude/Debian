@@ -20,6 +20,9 @@ set -f
 # make the script exits if any command in a pipeline fails
 set -o pipefail
 
+# Represent the log date format.
+declare -r log_date_format="+%Y-%m-%dT%H:%M:%S%z"
+
 #
 # Prints a message on `STDOUT`. The error is prefixed by the current date and
 # time.
@@ -35,7 +38,7 @@ set -o pipefail
 #         arch::echo "Hello world"
 #
 arch::echo() {
-    echo -e "[$(date +'%Y-%m-%dT%H:%M:%S%z')] $@"
+    echo -e "[$(date $log_date_format)] $@"
 }
 
 #
@@ -53,7 +56,7 @@ arch::echo() {
 #         arch::error "Damn!"
 #
 arch::error() {
-    echo -e "\e[97;41m[$(date +'%Y-%m-%dT%H:%M:%S%z')]\e[0m $@" >&2
+    echo -e "\e[97;41m[$(date $log_date_format)]\e[0m $@" >&2
 }
 
 #
@@ -71,7 +74,7 @@ arch::error() {
 #         arch::info "Hello world"
 #
 arch::info() {
-    echo -e "\e[30;43m[$(date +'%Y-%m-%dT%H:%M:%S%z')]\e[0m $@"
+    echo -e "\e[30;43m[$(date $log_date_format)]\e[0m $@"
 }
 
 #
