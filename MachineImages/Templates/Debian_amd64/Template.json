@@ -9,8 +9,8 @@
         {
             "type"             : "virtualbox-iso",
             "name"             : "{{user `name`}}-{{user `builder_extension`}}",
-            "iso_url"          : "http://cdimage.debian.org/debian-cd/8.3.0/amd64/iso-cd/debian-8.3.0-amd64-netinst.iso",
-            "iso_checksum"     : "a9b490b4215d1e72e876b031dafa7184",
+            "iso_url"          : "http://cdimage.debian.org/debian-cd/8.4.0/amd64/iso-cd/debian-8.4.0-amd64-netinst.iso",
+            "iso_checksum"     : "8d52d1b7789cd5a464aae719f05299ec",
             "iso_checksum_type": "md5",
             "guest_os_type"    : "Debian_64",
             "headless"         : "{{user `headless`}}",
