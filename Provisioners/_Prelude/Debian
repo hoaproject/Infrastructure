@@ -133,3 +133,12 @@ if [[ "$unsafe_status" -ne 0 ]]; then
     git clone https://github.com/sstephenson/bats.git /tmp/bats
     sudo /tmp/bats/install.sh /usr/local
 fi
+
+# [`curl`](https://curl.haxx.se/) is required for any HTTP requests.
+arch::unsafe curl "which curl"
+
+if [[ "$unsafe_status" -ne 0 ]]; then
+    arch::info "\`curl\` is not found; installing it."
+
+    sudo apt-get install -y curl
+fi
