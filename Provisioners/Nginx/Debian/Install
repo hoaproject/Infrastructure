@@ -2,4 +2,15 @@
 #
 # Install nginx.
 
-sudo apt-get install nginx-full
+# Install nginx.
+sudo apt-get install -y nginx-full
+
+# Copy the configuration files.
+rm -rf /etc/nginx/*
+cp -r ../Resources/ /etc/nginx
+
+# Automatically start after booting.
+sudo update-rc.d nginx defaults
+
+# Start nginx.
+sudo systemctl start nginx

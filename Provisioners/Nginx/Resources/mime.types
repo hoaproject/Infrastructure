@@ -1,0 +1,29 @@
+types {
+    application/atom+xml            atom;
+    application/json                json;
+    application/octet-stream        iso img;
+    application/pdf                 pdf;
+    application/x-7z-compressed     7z;
+    application/x-javascript        js;
+    application/x-rar-compressed    rar;
+    application/zip                 zip;
+    audio/mpeg                      mpga mpega mp2 mp3 m4a;
+    audio/ogg                       oga ogg spx;
+    audio/webm                      weba;
+    image/gif                       gif;
+    image/jpeg                      jpeg jpg;
+    image/png                       png;
+    image/svg+xml                   svg svgz;
+    image/x-icon                    ico;
+    text/css                        css;
+    text/html                       html htm shtml;
+    text/mathml                     mml;
+    text/plain                      txt;
+    text/xml                        xml rss;
+    video/mp4                       mp4;
+    video/mpeg                      mpeg mpg mpe;
+    video/ogg                       ogv;
+    video/quicktime                 mov;
+    video/webm                      webm;
+    video/x-msvideo                 avi;
+}

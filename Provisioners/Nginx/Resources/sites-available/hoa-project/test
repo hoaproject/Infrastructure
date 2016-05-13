@@ -1,0 +1,11 @@
+server {
+    listen [::]:80;
+    server_name test.hoa-project.net test.hoa.io;
+
+    access_log /var/log/nginx/hoa-project/test/access.log;
+    error_log /var/log/nginx/hoa-project/test/error.log;
+
+    root /var/www/hoa-project/test/;
+
+    index index.html;
+}

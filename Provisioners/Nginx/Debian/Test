@@ -1,11 +1,23 @@
 #!/usr/bin/env bats
+#
+# Test nginx.
 
-@test "addition using bc" {
-    result="$(echo 2+2 | bc)"
-    [ "$result" -eq 4 ]
+@test "nginx is installed" {
+    run dpkg -s nginx-full
+
+    [[ "$status" -eq 0 ]]
 }
 
-@test "addition using dc" {
-    result="$(echo 2 2+p | dc)"
-    [ "$result" -eq 4 ]
+@test "The default nginx configuration file exists" {
+    [[ -f /etc/nginx/nginx.conf ]]
+}
+
+@test "A directory for site enabled exist" {
+    [[ -d /etc/nginx/sites-enabled ]]
+}
+
+@test "nginx will start automatically" {
+    run ls /etc/rc*.d | grep [SK]..nginx | wc -l
+
+    [[ "$output" -gt 0 ]]
 }
