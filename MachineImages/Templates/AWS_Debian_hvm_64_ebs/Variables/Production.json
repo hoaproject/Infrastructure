@@ -1,0 +1,5 @@
+{
+    "name"		: "HOA Server",
+    "ami_name"          : "hoa",
+    "instance_type"     : "t2.micro"
+}

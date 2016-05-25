@@ -1,0 +1,33 @@
+{
+    "builders": [{
+        "type": "amazon-ebs",
+        "region": "eu-west-1",
+        "source_ami": "ami-11c57862",
+        "instance_type": "{{user `instance_type`}}",
+        "ssh_username": "admin",
+        "ami_name": "{{user `ami_name`}}-{{timestamp}}",
+        "associate_public_ip_address": true,
+        "tags": {
+            "Name": "{{user `name`}}",
+            "created_at": "{{timestamp}}",
+            "aws_source_ami": "ami-11c57862"
+        }
+    }],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "export DEBIAN_FRONTEND=noninteractive",
+                "sudo apt-get update",
+                "sudo apt-get upgrade -y",
+                "sudo apt-get autoremove -y"
+            ]
+        },
+	{
+            "type": "shell",
+	    "scripts": [
+                "Scripts/Initialize.sh"
+            ]
+        }
+    ]
+}
