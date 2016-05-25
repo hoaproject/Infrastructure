@@ -1,0 +1,5 @@
+{
+    "name"		: "HOA Server --debug",
+    "ami_name"          : "hoa-debug",
+    "instance_type"     : "t2.micro"
+}
